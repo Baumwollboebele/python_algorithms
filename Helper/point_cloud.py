@@ -2,13 +2,18 @@ from random import randint
 from math import cos, sin, radians
 
 
-class _Point_2D:
-    def __init__(self):
+class _Point2D:
+    def __init__(self, x=None, y=None):
         """
         Initializes a 2D point object with x and y coordinates.
         """
-        self.x = randint(0, 50)
-        self.y = randint(0, 50)
+        if x is None:
+            x = randint(0, 50)
+        if y is None:
+            y = randint(0, 50)
+
+        self.x = x
+        self.y = y
 
     def __str__(self):
         return f"X: {self.x} Y: {self.y}"
@@ -17,14 +22,27 @@ class _Point_2D:
         return f"X: {self.x} Y: {self.y}"
 
 
-class _Point_3D:
-    def __init__(self):
+class _Point3D:
+    def __init__(self, x=None, y=None, z=None):
         """
-        Initializes a 3D point object with x,y and z coordinates.
+        Initializes a 3D point object wit x,y and z coordinates.
+
+        Args:
+            x (integer, optional): X coordinate. Defaults to randint(0, 50).
+            y (integer, optional): Y coordinate. Defaults to randint(0, 50).
+            z (integer, optional):Z. Defaults to randint(0, 50).
         """
-        self.x = randint(0, 50)
-        self.y = randint(0, 50)
-        self.z = randint(0, 50)
+
+        if x is None:
+            x = randint(0, 50)
+        if y is None:
+            y = randint(0, 50)
+        if z is None:
+            z = randint(0, 50)
+
+        self.x = x
+        self.y = y
+        self.z = z
 
     def __str__(self):
         return f"X: {self.x} Y: {self.y} Z: {self.z}"
@@ -77,7 +95,7 @@ class PointCloud2D(_PointCloud):
         super().__init__(size)
 
         for _ in range(size):
-            self.point_cloud.append(_Point_2D())
+            self.point_cloud.append(_Point2D())
 
     def rotate(self, rotation):
         """
@@ -133,7 +151,11 @@ class PointCloud2D(_PointCloud):
         self.random_rotation()
         return
 
+    def get_centroid(self):
+        x = sum(self.get_x_values()) / len(self.get_x_values())
+        y = sum(self.get_y_values()) / len(self.get_y_values())
 
+        return _Point2D(x,y)
 class PointCloud3D(_PointCloud):
     def __init__(self, size):
         """
@@ -146,7 +168,7 @@ class PointCloud3D(_PointCloud):
         super().__init__(size)
 
         for _ in range(size):
-            self.point_cloud.append(_Point_3D())
+            self.point_cloud.append(_Point3D())
 
     def get_z_values(self):
         """
@@ -200,7 +222,7 @@ class PointCloud3D(_PointCloud):
             point.x = round((point.x*cos(rotation)) - (point.y*sin(rotation)), 2)
             point.x = round((point.x*sin(rotation)) + (point.y*cos(rotation)), 2)
         return
-        
+
     def translate(self, x, y, z):
         """
         Translate the coordinates of the point cloud by x and y.
@@ -239,3 +261,10 @@ class PointCloud3D(_PointCloud):
         self.random_translation()
         self.random_rotation()
         return
+
+    def get_centroid(self):
+        x = sum(self.get_x_values()) / len(self.get_x_values())
+        y = sum(self.get_y_values()) / len(self.get_y_values())
+        z = sum(self.get_z_values()) / len(self.get_z_values())
+
+        return _Point3D(x, y, z)
