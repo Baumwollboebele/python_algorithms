@@ -44,4 +44,3 @@ if __name__ == "__main__":
 
     sorted_array = bubble_sort(random_array)
     print(f"Sorted Array:\n{sorted_array}")
-
