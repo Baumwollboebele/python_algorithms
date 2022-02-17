@@ -31,7 +31,7 @@ def bubble_sort(array):
 
 
 if __name__ == "__main__":
-    import doctest
+    #import doctest
     from random import randint
 
     #doctest.testmod()
