@@ -21,4 +21,4 @@ jobs:
           flake8 bubble_sort.py --count --max-complexity=10 --max-line-length=79 --statistics
       - name: Lint with Pylint
         run: |
-          pylint bubble_sort.py
+          pylint bubble_sort.py --disable=disable=C0321 
