@@ -12,7 +12,7 @@ def bubble_sort(array):
         >>> bubble_sort([]) == sorted([])
         True
 
-        >>> bubble_sort([1]) == [2]
+        >>> bubble_sort([1]) == [1]
         True
 
         >>> bubble_sort([4,3,2,1]) == sorted([4,3,2,1])
