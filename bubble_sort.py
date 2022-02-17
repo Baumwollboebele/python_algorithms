@@ -31,10 +31,10 @@ def bubble_sort(array):
 
 
 if __name__ == "__main__":
-    #import doctest
+    # import doctest
     from random import randint
 
-    #doctest.testmod()
+    # doctest.testmod()
     n = input("Please provide the length of the array: ")
     n = int(n)
 
